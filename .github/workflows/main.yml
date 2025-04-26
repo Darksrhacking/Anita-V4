@@ -1,0 +1,33 @@
+name: Queen Anita MD BOT
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18.x'
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build the project (if needed)
+      run: |
+        npm run build || echo "No build step defined"
+
+    - name: Start the bot
+      run: |
+        npm start
+        
